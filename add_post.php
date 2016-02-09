@@ -16,7 +16,7 @@
 		<script type="text/javascript">
 			$(document).ready(function() {	
                 
-                var w = $('#form_post').width();
+                var w = $('main').width();
                 
 				CKEDITOR.timestamp='ABCD'; // Reload all .js and .css files
 				CKEDITOR.config.width = w;
