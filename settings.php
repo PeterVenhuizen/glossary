@@ -30,15 +30,15 @@
             
             <?php
                 
-				$sorted_colors = cf_sort_hex_colors($colors);
+				//$sorted_colors = cf_sort_hex_colors($colors);
 
-				foreach ($sorted_colors as &$c) {
-					echo '	<div style="background-color: ' . $c . ';" class="small_square"></div>';
-				}
+				//foreach ($sorted_colors as &$c) {
+					//echo '	<div style="background-color: ' . $c . ';" class="small_square"></div>';
+				//}
 
             ?>
             
-            <?php #include('footer.php'); ?>
+            <?php //include('footer.php'); ?>
             
 		</main>
         
