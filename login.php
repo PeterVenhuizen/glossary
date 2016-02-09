@@ -111,6 +111,7 @@
                         header ("Location: " . $url);
                     }
                 } else {
+                    unset($_COOKIE['rememberme']);
 				?>
 					<script>
 						alert("Inloggen mislukt.");
