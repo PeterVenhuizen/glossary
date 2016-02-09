@@ -43,7 +43,7 @@
 	
 					try {
 						$stmt = $db->prepare("SELECT * FROM books_users WHERE username = :username");
-						$stmt->execute(array(':username' => mysql_real_escape_string($_POST['login_username'])));
+						$stmt->execute(array(':username' => $_POST['login_username']));
 					} catch (PDOException $ex) { }
 
 					$login_ok = false; 

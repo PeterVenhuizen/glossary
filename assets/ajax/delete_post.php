@@ -9,14 +9,12 @@
 
 		if (isset($_POST['id'])) {
 
-			$id = mysql_real_escape_string($_POST['id']);
-
             # Remove post
 		    try {
 		        $stmt = $db->prepare("DELETE FROM glossary WHERE id = :id");
-                $stmt->bindValue('id', $id);
+                $stmt->bindValue('id', $_POST['id']);
 		        $stmt->execute();
-		    } catch (PDOException $ex) { $ex->getMessage(); }
+		    } catch (PDOException $ex) { die(); }
 			
             remove_lonely_tags($db);
 		}

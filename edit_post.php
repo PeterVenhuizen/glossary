@@ -51,7 +51,7 @@
                 if (isset($_GET['id'])) {
                     
                     $query = 'SELECT * FROM glossary WHERE id = :id LIMIT 1';
-                    $query_params = array(':id' => mysql_real_escape_string($_GET['id']));
+                    $query_params = array(':id' => $_GET['id']);
                     try {
                         $stmt = $db->prepare($query);
                         $stmt->execute($query_params);
@@ -80,8 +80,8 @@
             
             <?php
                 if (isset($_POST['form_submit'])) {
-                    $topic = mysql_real_escape_string($_POST['form_topic']);
-                    $keywords = strtolower(mysql_real_escape_string($_POST['form_keywords']));
+                    $topic = $_POST['form_topic'];
+                    $keywords = strtolower($_POST['form_keywords']);
                     $body = ( get_magic_quotes_gpc() ? htmlspecialchars(stripslashes($_POST['form_body'])) : htmlspecialchars($_POST['form_body']) );
 
                     $query = 'UPDATE glossary SET topic=:topic, tags=:keywords, body=:body WHERE id = :id';

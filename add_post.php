@@ -63,8 +63,8 @@
             
             <?php
                 if (isset($_POST['form_submit'])) {
-                    $topic = mysql_real_escape_string($_POST['form_topic']);
-                    $keywords = strtolower(mysql_real_escape_string($_POST['form_keywords']));
+                    $topic = $_POST['form_topic'];
+                    $keywords = strtolower($_POST['form_keywords']);
                     $body = ( get_magic_quotes_gpc() ? htmlspecialchars(stripslashes($_POST['form_body'])) : htmlspecialchars($_POST['form_body']) );
 
                     $query = 'INSERT INTO glossary (topic, tags, body) VALUES (:topic, :keywords, :body)';

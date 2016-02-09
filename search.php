@@ -29,7 +29,7 @@
                 if (isset($_POST['search'])) {
                                
 		            try {
-		                $val = mysql_real_escape_string($_POST['search']);
+		                $val = $_POST['search'];
 		                if (strlen($val) <= 4) {
 		                	$stmt = $db->prepare("SELECT * FROM glossary WHERE topic LIKE ? OR tags LIKE ? ORDER BY added DESC");
 		                	$stmt->execute(array("%" . $val . "%", "%" . $val . "%"));

@@ -4,9 +4,6 @@
     $host = 'localhost';
     $dbname = 'glossary';	
 
-	mysql_connect($host,$username,$password) or die (mysql_error());
-	mysql_select_db($dbname) or die (mysql_error());
-
 	$mysqli = new mysqli($host, $username, $password, $dbname);
 	if ($mysqli->connect_errno) {
 		echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;

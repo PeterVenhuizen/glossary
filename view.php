@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 
-<?php 
-	require_once('assets/config.php'); 
-?>
+<?php require_once('assets/config.php'); ?>
 
 <html>
 	<head>
@@ -30,7 +28,7 @@
                 
                 	try {
                 		$stmt = $db->prepare("SELECT * FROM glossary WHERE id = :id LIMIT 1");
-                		$stmt->bindValue('id', mysql_real_escape_string($_GET['single']));
+                		$stmt->bindValue('id', $_GET['single']);
                 		$stmt->execute();
                 		if ($stmt->rowCount() == 1) {
                 			$row = $stmt->fetch();
@@ -66,7 +64,7 @@
                 
 		            try {
 		                $stmt = $db->prepare("SELECT * FROM glossary WHERE tags LIKE ? ORDER BY added DESC");
-		                $stmt->bindValue(1, "%" . str_replace('_', ' ', mysql_real_escape_string($_GET['cat'])) . "%", PDO::PARAM_STR);
+		                $stmt->bindValue(1, "%" . str_replace('_', ' ', $_GET['cat']) . "%", PDO::PARAM_STR);
 		                $stmt->execute();
 		                if ($stmt->rowCount() > 0) {
 		                    foreach ($stmt as $row) {
@@ -103,7 +101,7 @@
 
             ?>
             
-            <?php #include('footer.php'); ?>
+            <?php include('footer.php'); ?>
             
 		</main>
         
