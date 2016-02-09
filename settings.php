@@ -36,9 +36,16 @@
 					//echo '	<div style="background-color: ' . $c . ';" class="small_square"></div>';
 				//}
 
+				# Create table backup file
+				//try {
+				//	$stmt = $db->prepare('SELECT * INTO OUTFILE "backup/glossary.sql" FROM glossary');
+				//	$stmt->execute();
+					//rename('/tmp/glossary.sql', '
+				//} catch (PDOException $ex) { die($ex->getMessage()); }
+
             ?>
             
-            <?php //include('footer.php'); ?>
+            <?php include('footer.php'); ?>
             
 		</main>
         
