@@ -46,6 +46,7 @@
 		<?php 
 			include('header.php'); 
 			if(!isset($_SESSION['user'])) { 
+                $_SESSION['lastpage'] = 'add_post.php';
 				echo '<META HTTP-EQUIV=Refresh CONTENT="0; URL=login.php">';
 				die();
 			} else {

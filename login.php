@@ -34,11 +34,15 @@
             	
             	<br>
             	
+                <label><input type="checkbox" name="login_remember">Remember me</label>
+                <input type="hidden" name="referer" value="<?php $_SERVER['REQUEST_URI']; ?>" />
+                
             	<input type="submit" name="login_submit" value="Login">
             	
             </form>
             
             <?php
+
 				if (isset($_POST['login_submit'])) { 
 	
 					try {
@@ -64,8 +68,19 @@
 						unset($row['salt']); 
 						unset($row['password']);
 
-						$_SESSION['user'] = $row; 
+						$_SESSION['user'] = $row['username'];
+                        
+                        if (isset($_POST['login_remember'])) {
+                            $digest = sha1(strval(rand(0,microtime(true)) + $row['username'] + strval(microtime(true))));
+                            try {
+                                $stmt = $db->prepare("UPDATE books_users SET digest=:digest WHERE username=:username");
+                                $stmt->execute(array(':digest' => $digest, ':username' => $row['username']));
+                                setcookie( 'rememberme', $digest, time()+3600*24*7, '/', '', false, true);
+                            } catch (PDOException $ex) { die(); }
+                        }
+                        
 						header("Location: " . $config['absolute_path']);
+                        
 					} else {
 				?>
 					<script>
@@ -74,7 +89,35 @@
 					</script>
 				<?php	
 					}
-				}
+                
+                # Check if login cookie exists
+                } else if (isset($_COOKIE['rememberme'])) {
+                    
+                    # Check database
+                    try {
+                        $stmt = $db->prepare("SELECT username FROM books_users WHERE digest=:digest");
+                        $stmt->bindValue('digest', $_COOKIE['rememberme']);
+                        $stmt->execute();
+                    } catch (PDOException $ex) { die(); }
+                    
+                    # Check if digest was found
+                    if ($stmt->rowCount() == 1) {
+                        $row = $stmt->fetch();
+                        $_SESSION['user'] = $row['username'];
+                        
+                        # Try to redirect to previous page
+                        $url = (isset($_SESSION['lastpage'])) ? $_SESSION['lastpage'] : '/';
+                        unset($_SESSION['lastpage']);
+                        header ("Location: " . $url);
+                    }
+                } else {
+				?>
+					<script>
+						alert("Inloggen mislukt.");
+						window.location.href = document.referrer;
+					</script>
+				<?php	
+					}
             ?>
             
             <?php #include('footer.php'); ?>

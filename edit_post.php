@@ -46,6 +46,7 @@
 		<?php 
 			include('header.php'); 
 			if(!isset($_SESSION['user'])) { 
+                $_SESSION['lastpage'] = $_SERVER['REQUEST_URI'];
 				echo '<META HTTP-EQUIV=Refresh CONTENT="0; URL=login.php">';
 				die();
 			} else {
@@ -54,6 +55,7 @@
 		<main>
             
             <?php
+                
                 if (isset($_GET['id'])) {
                     
                     $query = 'SELECT * FROM glossary WHERE id = :id LIMIT 1';
