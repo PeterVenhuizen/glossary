@@ -43,7 +43,13 @@
 	
 	<body>      
 		
-		<?php include('header.php'); ?>
+		<?php 
+			include('header.php'); 
+			if(!isset($_SESSION['user'])) { 
+				echo '<META HTTP-EQUIV=Refresh CONTENT="0; URL=login.php">';
+				die();
+			} else {
+        ?>
 		
 		<main>
             
@@ -108,6 +114,9 @@
             ?>
             
 		</main>
+	<?php
+		}
+	?>
         
 	</body>
 </html>
