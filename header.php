@@ -1,5 +1,5 @@
         <?php include 'functions.php'; ?>
-        <!-- http://www.bitrepository.com/php-autologin.html -->
+        <!-- http://code.tutsplus.com/tutorials/an-introduction-to-cookies--net-12482 -->
         <header id="page_header" style="background-color: <?php echo $colors[array_rand($colors)]; ?>;">
         	<style>
         	<?php
