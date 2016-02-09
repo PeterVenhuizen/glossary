@@ -109,16 +109,16 @@
                         $url = (isset($_SESSION['lastpage'])) ? $_SESSION['lastpage'] : '/';
                         unset($_SESSION['lastpage']);
                         header ("Location: " . $url);
+                    } else {
+                        unset($_COOKIE['rememberme']);   
+                    ?>
+                        <script>
+                            alert("Inloggen mislukt.");
+                            window.location.href = document.referrer;
+                        </script>
+                    <?php	
                     }
-                } else {
-                    unset($_COOKIE['rememberme']);
-				?>
-					<script>
-						alert("Inloggen mislukt.");
-						window.location.href = document.referrer;
-					</script>
-				<?php	
-					}
+                }
             ?>
             
             <?php #include('footer.php'); ?>
